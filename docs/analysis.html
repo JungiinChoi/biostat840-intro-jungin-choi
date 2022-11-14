@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.36">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Jungin Choi - Example analysis</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Jungin Choi</span>
+  </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html">Home</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./about.html">About</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./analysis.html" aria-current="page">Example analysis</a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#status-of-trees" id="toc-status-of-trees" class="nav-link active" data-scroll-target="#status-of-trees">Status of Trees</a>
+  <ul class="collapse">
+  <li><a href="#the-question-to-answer" id="toc-the-question-to-answer" class="nav-link" data-scroll-target="#the-question-to-answer">The question to answer</a></li>
+  </ul></li>
+  <li><a href="#age-of-trees" id="toc-age-of-trees" class="nav-link" data-scroll-target="#age-of-trees">Age of Trees</a>
+  <ul class="collapse">
+  <li><a href="#the-question-to-answer-1" id="toc-the-question-to-answer-1" class="nav-link" data-scroll-target="#the-question-to-answer-1">The question to answer</a></li>
+  </ul></li>
+  <li><a href="#size-and-diameter-of-trees" id="toc-size-and-diameter-of-trees" class="nav-link" data-scroll-target="#size-and-diameter-of-trees">Size and Diameter of Trees</a>
+  <ul class="collapse">
+  <li><a href="#the-question-to-answer-2" id="toc-the-question-to-answer-2" class="nav-link" data-scroll-target="#the-question-to-answer-2">The question to answer</a></li>
+  </ul></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  <li><a href="#functions" id="toc-functions" class="nav-link" data-scroll-target="#functions">Functions</a>
+  <ul class="collapse">
+  <li><a href="#dplyr" id="toc-dplyr" class="nav-link" data-scroll-target="#dplyr">dplyr</a></li>
+  <li><a href="#ggplot2" id="toc-ggplot2" class="nav-link" data-scroll-target="#ggplot2">ggplot2</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Example analysis</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<p>This page provides simple examples of data analysis using <code>R</code> and <code>tidyverse</code> with data from San Francisco’s <a href="https://data.sfgov.org/City-Infrastructure/Street-Tree-List/tkzw-k3nq">open data portal</a> and cleaned version from <a href="https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-01-28/readme.md">tidytuesday</a>.</p>
+<p>This SF tree dataset is composed of information of trees in San Francisco including its species, address, size, longitude, latitude, when it was planted, etc.</p>
+<p>The intended audience for this data analysis is for park designers or botanists who are interested in overall trends of planting trees.</p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Data dictionary:</p>
+<p>A full data dictionary is available at: <a href="https://data.sfgov.org/City-Infrastructure/Street-Tree-List/tkzw-k3nq">open data portal</a>.</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">variable</th>
+<th style="text-align: left;">class</th>
+<th style="text-align: left;">description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">tree_id</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Unique ID</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">legal_status</td>
+<td style="text-align: left;">character</td>
+<td style="text-align: left;">LegalLegal staus: Permitted or DPW maintained</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">species</td>
+<td style="text-align: left;">character</td>
+<td style="text-align: left;">Tree species includes common name after the :: separator</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">address</td>
+<td style="text-align: left;">character</td>
+<td style="text-align: left;">Street Address</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">site_order</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Order of tree at address where multiple trees are at same address. Trees are ordered in ascending</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">address order</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">site_info</td>
+<td style="text-align: left;">character</td>
+<td style="text-align: left;">Site Info - Where the tree resides</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">caretaker</td>
+<td style="text-align: left;">character</td>
+<td style="text-align: left;">Agency or person that is primary caregiver to tree – Owner of Tree</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">date</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Date Planted (NA if before 1955)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">dbh</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;"><a href="https://en.wikipedia.org/wiki/Diameter_at_breast_height">Diameter at breast height</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">plot_size</td>
+<td style="text-align: left;">character</td>
+<td style="text-align: left;">Dimension of plot - typically in feet</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">latitude</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Latitude</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">longitude</td>
+<td style="text-align: left;">double</td>
+<td style="text-align: left;">Longitude</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<section id="status-of-trees" class="level2">
+<h2 class="anchored" data-anchor-id="status-of-trees">Status of Trees</h2>
+<section id="the-question-to-answer" class="level3">
+<h3 class="anchored" data-anchor-id="the-question-to-answer">The question to answer</h3>
+<ul>
+<li>What types of status of trees are there, and how are they distributed?</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'ggplot2' was built under R version 4.1.2</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'tibble' was built under R version 4.1.2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>trees <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-01-28/sf_trees.csv"</span>) </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>trees <span class="ot">&lt;-</span> trees <span class="sc">%&gt;%</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(<span class="st">"address"</span>,<span class="st">"site_order"</span>,<span class="st">"site_info"</span>,<span class="st">"plot_size"</span>,<span class="st">"tree_id"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">status =</span> legal_status) <span class="sc">%&gt;%</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(dbh), <span class="sc">!</span><span class="fu">is.na</span>(status)) <span class="sc">%&gt;%</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">short_status =</span> <span class="fu">str_extract</span>(status, <span class="st">"^.{4}"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>trees <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>short_status, <span class="at">fill=</span>status)) <span class="sc">+</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Status (Abbreviated)"</span>) <span class="sc">+</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Number of Trees"</span>) <span class="sc">+</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Legal Status of Trees in San Francisco"</span>, </span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"from San Francisco's open data portal"</span>,</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Majority of the trees are maintained by DPW(Directorate of Public Works). "</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="analysis_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Since most trees are maintained by DPW, I wanted to check the distribution of trees excluding those from DPW.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>trees <span class="sc">%&gt;%</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(short_status <span class="sc">!=</span> <span class="st">"DPW "</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>short_status, <span class="at">fill=</span>status)) <span class="sc">+</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Status (Abbreviated)"</span>) <span class="sc">+</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Number of Trees"</span>) <span class="sc">+</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Legal Status of Trees in San Francisco"</span>, </span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"without those maintained from DPW"</span>,</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Majority of the trees are maintained by DPW(Directorate of Public Works). "</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="analysis_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="age-of-trees" class="level2">
+<h2 class="anchored" data-anchor-id="age-of-trees">Age of Trees</h2>
+<section id="the-question-to-answer-1" class="level3">
+<h3 class="anchored" data-anchor-id="the-question-to-answer-1">The question to answer</h3>
+<ul>
+<li>When were the trees nowadays in San Francisco planted?</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>trees <span class="sc">%&gt;%</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(date)) <span class="sc">%&gt;%</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(date) <span class="sc">%&gt;%</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">total_count=</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>date, <span class="at">y =</span> total_count)) <span class="sc">+</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Date Planted"</span>) <span class="sc">+</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Number of Trees"</span>) <span class="sc">+</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Date Trees Planted in San Francisco"</span>, </span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"after 1955"</span>,</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Majority of trees are planted between from 2000 to recent."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="analysis_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>From this plot, we can check when the trees are planted and the overall trends of its date planted. There is a huge gap between 1955 and 1970 which means that trees are not planted during that period.</p>
+</section>
+</section>
+<section id="size-and-diameter-of-trees" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="size-and-diameter-of-trees">Size and Diameter of Trees</h2>
+<section id="the-question-to-answer-2" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="the-question-to-answer-2">The question to answer</h3>
+<ul>
+<li>How the size and diameter of trees differ from each status?</li>
+<li>Are landmark trees are tend to be thicker or bigger?</li>
+</ul>
+<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Size or Diameter of tree are often defined as <strong>DBH</strong> which is <strong>‘Diameter at breast height’</strong>.</p>
+<p>Tree sizes are measured at the adult’s breast height, which usually differs by countries and situations. In many countries, DBH is measured at approximately 1.3 m (4.3 ft) above ground. <a href="https://en.wikipedia.org/wiki/Diameter_at_breast_height">wikipedia:DBH</a></p>
+<p><img src="Using_a_DTApe.JPG" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>trees <span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(short_status <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"DPW "</span>,<span class="st">"Land"</span>,<span class="st">"Perm"</span>,<span class="st">"Undo"</span>), dbh <span class="sc">&lt;=</span> <span class="dv">2000</span> , dbh <span class="sc">&gt;</span><span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="dv">1</span>, <span class="at">y=</span><span class="fu">log</span>(dbh))) <span class="sc">+</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()<span class="sc">+</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>status) <span class="sc">+</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Status"</span>) <span class="sc">+</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"log(DBH) (ft)"</span>) <span class="sc">+</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"DBH of trees in San Francisco"</span>, </span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Maintained by DPW, Landmark, Permitted and undocumented trees"</span>,</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Landmark trees tend to be large and thick in terms of DBH."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="analysis_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Landmark trees tend to be large and thick in terms of DBH. But there is no big DBH difference between those other three groups. In addition, we could observe that some of trees maintained by DPW tends to be bigger and thicker than from other two groups(Permitted, Undocumented).</p>
+<div class="cell page-columns page-full">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>trees <span class="sc">%&gt;%</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(short_status <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"DPW "</span>,<span class="st">"Land"</span>,<span class="st">"Perm"</span>,<span class="st">"Undo"</span>), dbh <span class="sc">&lt;=</span> <span class="dv">2000</span> , dbh <span class="sc">&gt;</span><span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(status) <span class="sc">%&gt;%</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">average =</span> <span class="fu">round</span>(<span class="fu">mean</span>(dbh),<span class="dv">2</span>),</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd =</span> <span class="fu">round</span>(<span class="fu">sd</span>(dbh),<span class="dv">2</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"Legal Status"</span>, <span class="st">"Average DBH (inch)"</span>,<span class="st">"Standard deviation (inch)"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+<div class="no-row-height column-margin column-container"><div class="cell-output-display">
+<table class="table table-sm table-striped">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Legal Status</th>
+<th style="text-align: right;">Average DBH (inch)</th>
+<th style="text-align: right;">Standard deviation (inch)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">DPW Maintained</td>
+<td style="text-align: right;">9.97</td>
+<td style="text-align: right;">12.03</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Landmark tree</td>
+<td style="text-align: right;">37.13</td>
+<td style="text-align: right;">13.96</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Permitted Site</td>
+<td style="text-align: right;">10.11</td>
+<td style="text-align: right;">11.01</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Undocumented</td>
+<td style="text-align: right;">11.63</td>
+<td style="text-align: right;">10.54</td>
+</tr>
+</tbody>
+</table>
+</div></div></div>
+</section>
+</section>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<p>There are three main questions I aim to answer from this data analysis. The first one is ‘What is the status of the trees and how are distributed?’. We could find that most of the trees are maintained by DPW, permitted sites. The next largest population of trees were undocumented whose legal status was unknown. By second analysis of trees regarding their age and date planted, we could visualize it’s an overall trend when they were planted. Lastly, we could check the distribution of the trees’ size defined as DBH, and we could find that the size of Landmark trees is significantly larger than other trees.</p>
+</section>
+<section id="functions" class="level2">
+<h2 class="anchored" data-anchor-id="functions">Functions</h2>
+<section id="dplyr" class="level3">
+<h3 class="anchored" data-anchor-id="dplyr">dplyr</h3>
+<ul>
+<li>filter()</li>
+<li>select()</li>
+<li>group_by()</li>
+<li>summarise()</li>
+<li>rename()</li>
+<li>mutate()</li>
+</ul>
+</section>
+<section id="ggplot2" class="level3">
+<h3 class="anchored" data-anchor-id="ggplot2">ggplot2</h3>
+<ul>
+<li>geom_bar()</li>
+<li>geom_line()</li>
+<li>geom_boxplot()</li>
+<li>facet_wrap()</li>
+</ul>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

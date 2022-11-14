@@ -1,0 +1,172 @@
+---
+title: "Example analysis"
+editor: visual
+bibliography: analysis.bib
+---
+
+This page provides simple examples of data analysis using `R` and `tidyverse` with data from San Francisco's [open data portal](https://data.sfgov.org/City-Infrastructure/Street-Tree-List/tkzw-k3nq) and cleaned version from 
+[tidytuesday](https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-01-28/readme.md). 
+
+This SF tree dataset is composed of information of trees in San Francisco including its species, address, size, longitude, latitude, when it was planted, etc. 
+
+The intended audience for this data analysis is for park designers or botanists who are interested in overall trends of planting trees. 
+
+::: callout-note
+
+Data dictionary:
+
+A full data dictionary is available at: [open data portal](https://data.sfgov.org/City-Infrastructure/Street-Tree-List/tkzw-k3nq).
+
+|variable     |class     |description |
+|:------------|:---------|:-----------|
+|tree_id      |double    | Unique ID |
+|legal_status |character | LegalLegal staus: Permitted or DPW maintained |
+|species      |character | Tree species includes common name after the :: separator |
+|address      |character | Street Address |
+|site_order   |double    | Order of tree at address where multiple trees are at same address. Trees are ordered in ascending
+address order |
+|site_info    |character | Site Info - Where the tree resides |
+|caretaker    |character | Agency or person that is primary caregiver to tree -- Owner of Tree |
+|date         |double    | Date Planted (NA if before 1955)|
+|dbh          |double    | [Diameter at breast height](https://en.wikipedia.org/wiki/Diameter_at_breast_height) |
+|plot_size    |character | Dimension of plot - typically in feet |
+|latitude     |double    | Latitude |
+|longitude    |double    | Longitude |
+
+:::
+
+## Status of Trees
+
+### The question to answer
+
+-   What types of status of trees are there, and how are they distributed?
+
+```{r, message=F}
+library(readr)
+library(tidyverse)
+library(stringr)
+
+trees <- readr::read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-01-28/sf_trees.csv") 
+
+trees <- trees %>%
+  select(-c("address","site_order","site_info","plot_size","tree_id")) %>%
+  rename(status = legal_status) %>%
+  filter(!is.na(dbh), !is.na(status)) %>%
+  mutate(short_status = str_extract(status, "^.{4}"))
+```
+
+```{r}
+trees %>%
+  ggplot(aes(x=short_status, fill=status)) +
+  geom_bar() +
+  xlab("Status (Abbreviated)") +
+  ylab("Number of Trees") +
+  labs(title = "Legal Status of Trees in San Francisco", 
+       subtitle = "from San Francisco's open data portal",
+       caption = "Majority of the trees are maintained by DPW(Directorate of Public Works). ")
+```
+
+Since most trees are maintained by DPW, I wanted to check the distribution of trees excluding those from DPW. 
+
+```{r}
+trees %>%
+  filter(short_status != "DPW ") %>%
+  ggplot(aes(x=short_status, fill=status)) +
+  geom_bar() +
+  xlab("Status (Abbreviated)") +
+  ylab("Number of Trees") +
+  labs(title = "Legal Status of Trees in San Francisco", 
+       subtitle = "without those maintained from DPW",
+       caption = "Majority of the trees are maintained by DPW(Directorate of Public Works). ")
+```
+
+
+## Age of Trees
+
+### The question to answer
+
+-   When were the trees nowadays in San Francisco planted?
+
+```{r}
+trees %>%
+  filter(!is.na(date)) %>%
+  group_by(date) %>%
+  summarise(total_count=n()) %>%
+  ggplot(aes(x=date, y = total_count)) +
+  geom_line() +
+  xlab("Date Planted") +
+  ylab("Number of Trees") +
+  labs(title = "Date Trees Planted in San Francisco", 
+       subtitle = "after 1955",
+       caption = "Majority of trees are planted between from 2000 to recent.")
+```
+
+From this plot, we can check when the trees are planted and the overall trends of its date planted. There is a huge gap between 1955 and 1970 which means that trees are not planted during that period. 
+
+## Size and Diameter of Trees
+
+### The question to answer
+
+-   How the size and diameter of trees differ from each status?
+-   Are landmark trees are tend to be thicker or bigger?
+
+::: callout-important
+Size or Diameter of tree are often defined as **DBH** which is **'Diameter at breast height'**. 
+
+Tree sizes are measured at the adult's breast height, which usually differs by countries and situations. In many countries, DBH is measured at approximately 1.3 m (4.3 ft) above ground. [wikipedia:DBH](https://en.wikipedia.org/wiki/Diameter_at_breast_height)
+
+![](Using_a_DTApe.JPG)
+:::
+
+```{r}
+trees %>%
+  filter(short_status %in% c("DPW ","Land","Perm","Undo"), dbh <= 2000 , dbh >0) %>%
+  ggplot(aes(x=1, y=log(dbh))) +
+  geom_boxplot()+
+  facet_wrap(~status) +
+  xlab("Status") +
+  ylab("log(DBH) (ft)") +
+  labs(title = "DBH of trees in San Francisco", 
+       subtitle = "Maintained by DPW, Landmark, Permitted and undocumented trees",
+       caption = "Landmark trees tend to be large and thick in terms of DBH.")
+
+```
+
+Landmark trees tend to be large and thick in terms of DBH. But there is no big DBH difference between those other three groups. In addition, we could observe that some of trees maintained by DPW tends to be bigger and thicker than from other two groups(Permitted, Undocumented). 
+  
+
+```{r}
+#| column: margin
+trees %>%
+  filter(short_status %in% c("DPW ","Land","Perm","Undo"), dbh <= 2000 , dbh >0) %>%
+  group_by(status) %>%
+  summarise(average = round(mean(dbh),2),
+            sd = round(sd(dbh),2)) %>%
+  knitr::kable(col.names = c("Legal Status", "Average DBH (inch)","Standard deviation (inch)"))
+```
+
+## Summary
+
+There are three main questions I aim to answer from this data analysis. The first one is 'What is the status of the trees and how are distributed?'. We could find that most of the trees are maintained by DPW, permitted sites. The next largest population of trees were undocumented whose legal status was unknown. By second analysis of trees regarding their age and date planted, we could visualize it's an overall trend when they were planted. Lastly, we could check the distribution of the trees' size defined as DBH, and we could find that the size of Landmark trees is significantly larger than other trees. 
+
+## Functions
+
+### dplyr
+-   filter()
+-   select()
+-   group_by()
+-   summarise()
+-   rename()
+-   mutate()
+
+### ggplot2
+
+-   geom_bar()
+-   geom_line()
+-   geom_boxplot()
+-   facet_wrap()
+
+
+
+
+

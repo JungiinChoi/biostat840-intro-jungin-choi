@@ -2,8 +2,20 @@
 title: "About"
 ---
 
-About this site
+## Education
 
-```{r}
-1 + 1
-```
+### Johns Hopkins Bloomberg School of Public Health
+
+PhD in Biostatistics\
+2022-2023
+
+### Seoul National University
+
+B.S in Statistics & Mathematics (Graduation: August 2022)
+
+## Professional Experience
+
+-   **Research Assistant**, *Prof. Taesung Park at Seoul National University and Seoul National University Hospital *\ Dec 2020 -- July 2022
+
+-   **NAVER Data Scientist, Full-time Paid Intern** *Search Quality Enhancement team at NAVER, Korea*\ 
+Aug 2021 -- March 2022
